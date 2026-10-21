@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "bots",
+			"path": "../bots"
+		},
+		{
+			"name": "PythonExercicios",
+			"path": "."
+		}
+	]
+}

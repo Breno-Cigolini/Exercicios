@@ -1,0 +1,5 @@
+n = (int(input('Digite um número: ')))
+print('Seu número é {}, sendo {} o seu antecessor,'.format(n, n-1), end= ' ')
+print('o seu sucessor {}.'.format(n+1))
+print('o dobro dele mesmo é {},'.format(n*2), end=' ')
+print('o triplo {} e sua raiz quadrada {:.2f}'.format(n*3, n**(1/2)))
