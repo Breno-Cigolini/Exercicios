@@ -15,5 +15,7 @@ public class Idades1154 {
         } while (idade >= 0);
         double media = idades / num;
         System.out.printf("%.2f\n", media);
+
+
     }
 }
