@@ -4,3 +4,6 @@ out/
 __pycache__/
 *.exe
 *.o
+build/
+dist/
+nbproject/
