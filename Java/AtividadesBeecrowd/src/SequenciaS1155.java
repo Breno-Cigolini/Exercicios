@@ -5,5 +5,6 @@ public class SequenciaS1155 {
             s += 1/i;
         }
         System.out.printf("%.2f\n",s);
+
     }
 }
