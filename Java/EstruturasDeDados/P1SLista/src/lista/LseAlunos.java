@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class LseAlunos
 {
@@ -247,17 +248,24 @@ public class LseAlunos
             
             NohAluno novo = new NohAluno();
             
-            novo.setIdAluno(this.D_Id_Aluno());
-            novo.setIdCursoAluno(this.D_Curso_Aluno());
-            novo.setNmAluno(this.D_Nome_Aluno());
-            novo.setSxAluno(this.D_Sexo_Aluno());
-            
-            novo.setProximoAluno(this.primeiroAluno);
-            if (this.primeiroAluno == null){
-                this.ultimoAluno = novo;
+            if (novo == null){
+                Msg.msg_central("Memória indisponível. Inserção não realizada.");
             }
-            this.primeiroAluno = novo;
-            novo.mostra_noh_Aluno(pos, 1);
+            else{
+                novo.setIdAluno(this.D_Id_Aluno());
+                novo.setIdCursoAluno(this.D_Curso_Aluno());
+                novo.setNmAluno(this.D_Nome_Aluno());
+                novo.setSxAluno(this.D_Sexo_Aluno());
+
+                if (this.vazia()){
+                    this.primeiroAluno = this.ultimoAluno = novo;
+                }
+                else {
+                    novo.setProximoAluno(this.primeiroAluno);
+                    this.primeiroAluno = novo;
+                    novo.mostra_noh_Aluno(pos, 1);
+                }
+            }
             
         }
         else {
@@ -309,6 +317,44 @@ public class LseAlunos
     {
         Msg.limpatela();
         Msg.msg_central ("PROCESSO DE REMOÇÃO POR POSIÇÃO"); 
+        
+        NohAluno remover = null;
+        
+        if (pos == 1){
+            
+            remover = this.primeiroAluno;
+            this.primeiroAluno = this.primeiroAluno.getProximoAluno();
+            
+            if (this.primeiroAluno == null){
+               this.ultimoAluno = null; 
+            }
+        }
+        else {
+            int posicao = 0;
+            NohAluno aux = null;
+            
+            for(aux = this.primeiroAluno, posicao = 1; (aux != this.ultimoAluno) && (posicao != pos - 1); aux = aux.getProximoAluno(), posicao++){
+            }
+            
+            if (aux == this.ultimoAluno){
+                Msg.msg_central("Posicao indisponivel");
+            }
+            else {
+                if (aux.getProximoAluno() == this.ultimoAluno){
+                    remover = this.ultimoAluno;
+                    this.ultimoAluno = aux;
+                    aux.getProximoAluno().setProximoAluno(null);
+                }
+                else {
+                    remover = aux.getProximoAluno();
+                    aux.setProximoAluno(aux.getProximoAluno().getProximoAluno());
+                }
+            }
+        }
+        if (remover != null){
+            remover.setProximoAluno(null);
+            remover.mostra_noh_Aluno(pos, 1);
+        }
     }
     
 
